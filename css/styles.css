@@ -1,0 +1,14 @@
+/* Part of W3css */
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+    
+body, html {
+  padding-top: 30px;
+  height: 100%;
+  line-height: 1.8;
+}
+
+.w3-bar .w3-button {
+  padding: 16px;
+}
+
+/* My css */
