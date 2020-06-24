@@ -1,14 +1,14 @@
 // Global variable containing all the Dataset
 let nutData;
 
-let fasceEta = [100, 25, 25, 50, 25];
+let fasceEta = [0, 0, 0, 0, 0];
 let idpersona = [];
 
 
 function calculateAgeArray(subject, eta) {
     let flag = false;
     for (let i = 0; i < idpersona.length; i++) {
-        if (subject == idpersona[i]) {  // controllo l'esistenza della persona nell'array
+        if (subject == idpersona[i]) {  // controllo l'esistenza della persona nell'array IDENTIFICA la persona UNIVOCA
             flag = true;
         }
     }
@@ -36,54 +36,183 @@ function calculateAgeArray(subject, eta) {
 // D3 code
 function createLeftBarChart() {
 
-    // dimensions and margins of the graph
-    let margin = {
-        top: 5,
-        right: 10,
-        bottom: 5,
-        left: 20
-    }
+    //     // dimensions and margins of the graph
+    //     let margin = {
+    //         top: 5,
+    //         right: 10,
+    //         bottom: 5,
+    //         left: 40
+    //     }
 
-    let width = 200 - margin.left - margin.right;
-    let height = 200 - margin.top - margin.bottom;
-    let altezzaBar = 30;
-    // ranges
-    let x = d3.scaleLinear()
-        .range([0, width]);
+    //     let width = 200 - margin.left - margin.right;
+    //     let height = 200 - margin.top - margin.bottom;
+    //     let altezzaBar = 30;
+    //     let barPadding = 10;
+    //     // ranges
+    //     let x = d3.scaleLinear()
+    //         .range([0, width]);
 
-    let y = d3.scaleBand()
-        .range([height, 0])
-        .padding(0.1);
+    //     let y = d3.scaleBand()
+    //         .range([height, 0])
+    //         .padding(0.1);
 
-    // append svg object to body of the page
-    let svg = d3.select("#persone").append("svg")
+    //     // append svg object to body of the page
+    //     let svg = d3.select("#persone").append("svg")
+    //         .attr("id", "svg1")
+    //         .attr("width", width + margin.left + margin.right)
+    //         .attr("height", height + margin.top + margin.bottom)
+    //         .append("g")
+    //         .attr("transform", "translate(" + margin.left + "," + -5 + ")");
+
+    //     // scale
+    //     x.domain([0, d3.max(fasceEta, function (d) {
+    //         return d;
+    //     })]);
+
+    //     y.domain(["60+","50-59","40-49","30-39","20-29"]);
+
+
+    //     // append rectangles for the bar chart
+    //     svg.selectAll(".bar")
+    //         .data(fasceEta)
+    //         .enter().append("rect")
+    //         .attr("class", "bar")
+    //         .attr("fill", "rgb(0,0,255)")
+    //         .attr("width", function (d) {
+    //             return x(d);
+    //         })
+    //         .attr("y", function (d,i) {
+    //             return 150 - (140 - (altezzaBar+barPadding)*i);
+    //         })
+    //         .attr("height", altezzaBar);
+
+    // //     // append text asse y
+    // //     svg.selectAll("g")
+    // //         .data(data)
+    // //         .enter()
+    // //         .append("g")
+    // //         .append("text")
+    // //         .attr("class", "label")
+    // //         .attr("y", barHeight / 2)
+    // //         .attr("dy", ".35em") //vertical align middle
+    // //         .text(function(d){
+    // //             return d.label;
+    // //         }).each(function() {
+    // //     labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
+    // // }); 
+
+    //         let yAxis = d3.axisLeft()
+    //             .scale(y)
+    //             .ticks(5);
+
+    //     // create Y axis
+    //         d3.select("#svg1").append("g")
+    //         .attr("class", "y axis")
+    //         .attr("transform", "translate(0,0)")
+    //         .call(yAxis)
+    //         .selectAll("text")
+    //         .attr("y", 0)
+    //         .attr("x", 0)
+    //         .attr("dy", ".35em")
+    //         .style("text-anchor", "start");
+
+    var data = [{
+        "name": "60+",
+        "value": fasceEta[4],
+    },
+    {
+        "name": "50-59",
+        "value": fasceEta[3],
+    },
+    {
+        "name": "40-49",
+        "value": fasceEta[2],
+    },
+    {
+        "name": "30-39",
+        "value": fasceEta[1],
+    },
+    {
+        "name": "20-29",
+        "value": fasceEta[0],
+    }];
+
+    // Create left horizontal bar chart
+    var margin = {
+        top: 15,
+        right: 25,
+        bottom: 15,
+        left: 35
+    };
+    var barPadding = 2;
+
+    var width = 200 - margin.left - margin.right,
+        height = 200 - margin.top - margin.bottom;
+
+    var svg = d3.select("#hBarchart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // scale
-    x.domain([0, d3.max(fasceEta, function (d) {
-        return d;
-    })]);
-    y.domain(fasceEta.map(function (d) {
-        return d;                           // <--- Check qua, guardare esercizi prof per BARCHAR ORIZZONTALE
-    }));
+    var x = d3.scaleLinear()
+        .range([0, width])
+        .domain([0, d3.max(data, function (d) {
+            return d.value;
+        })]);
 
-    // append rectangles for the bar chart
-    svg.selectAll(".bar")
-        .data(fasceEta)
-        .enter().append("rect")
+   var y = d3.scaleBand()
+        .range([height, 0], .1)
+        .domain(data.map(function (d) {
+            return d.name;
+        })); 
+
+
+    //make y axis to show bar names
+    var yAxis = d3.axisLeft()
+        .scale(y)
+        //no tick marks
+        .tickSize(0);
+
+    var gy = svg.append("g")
+        .attr("class", "label")
+        .call(yAxis)
+
+    var bars = svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("g")
+
+    //append rects
+    bars.append("rect")
         .attr("class", "bar")
-        .attr("width", function (d) {
-            return x(d);
-        })
+        .attr("fill", "rgb(0,0,255)")
         .attr("y", function (d) {
-            return 200 - altezzaBar - y(d); // <--- PROBLEMA QUI o su asse Y in generale
-                                            // creare append per il g TEXT + BAR
+            return y(d.name);
         })
-        .attr("height", altezzaBar);
+        .attr("height", y.bandwidth()-barPadding)
+        .attr("x", 0)
+        .attr("width", function (d) {
+            return x(d.value);
+        });
 
+    //add a value label to the right of each bar
+    bars.append("text")
+        .attr("class", "label")
+        .attr("fill", "rgb(0,0,255")
+        //y position of the label is halfway down the bar
+        .attr("y", function (d) {
+            return y(d.name) + y.bandwidth() / 2 + 4;
+        })
+        //x position is 3 pixels to the right of the bar
+        .attr("x", function (d) {
+            return x(d.value) + 3;
+        })
+        .text(function (d) {
+            return d.value;
+        });
+
+    d3.select(".domain").remove();
 
 };
 
@@ -163,7 +292,7 @@ d3.csv("data/dc.csv", function (error, csv) {
 
 
         // Function that checks Subject uniqueness
-        //calculateAgeArray(d.SUBJECT, d.AGE);
+        calculateAgeArray(d.SUBJECT, d.AGE);
     });
 
     // Store csv data in a global variable
