@@ -1,6 +1,5 @@
 // Global variable containing all the Dataset
 let nutData;
-
 let fasceEta = [0, 0, 0, 0, 0];
 let idpersona = [];
 
@@ -30,6 +29,39 @@ function calculateAgeArray(subject, eta) {
             fasceEta[4]++; // 60+
         }
     }
+}
+
+
+
+
+function calculateNumberOfProducts(nutData) {
+    let univokeProducts = [];
+    let product = {id:"", price:""};
+    product["id"] = nutData[0].CODE;
+    product["price"] = nutData[0].PRICE_KG_L;
+    univokeProducts.push(product);
+    for (let i = 1; i < nutData.length; i++) {
+        let exist = false;
+        let product = {id:"", price:""};
+        for (let j = 0; j < univokeProducts.length; j++) {
+
+            // if ((univokeProducts[j].localeCompare(nutData[i].CODE)) == 0) {
+            //     exist = true;
+            //     break;
+            // }
+            if (univokeProducts[j]["id"] == nutData[i].CODE) {
+                exist = true;
+                break;
+            }
+
+        }
+        if (exist == false) {
+            product["id"] = nutData[i].CODE;
+            product["price"] = nutData[i].PRICE_KG_L;
+            univokeProducts.push(product);
+        }
+    }
+    console.log(univokeProducts);
 }
 
 
@@ -183,13 +215,18 @@ function createLeftBarChart() {
         .enter()
         .append("g")
 
+    var t = d3.transition()
+        .duration(1000)
+        .ease(d3.easePoly);
+
     //append rects
     bars.append("rect")
-        .attr("class", "bar")
-        .attr("fill", "rgb(0,0,255)")
         .attr("y", function (d) {
             return y(d.name);
         })
+        .transition(t)
+        .attr("class", "bar")
+        .attr("fill", "rgb(0,0,255)")
         .attr("height", y.bandwidth()-barPadding)
         .attr("x", 0)
         .attr("width", function (d) {
@@ -198,13 +235,12 @@ function createLeftBarChart() {
 
     //add a value label to the right of each bar
     bars.append("text")
-        .attr("class", "label")
-        .attr("fill", "rgb(0,0,255")
-        //y position of the label is halfway down the bar
         .attr("y", function (d) {
             return y(d.name) + y.bandwidth() / 2 + 4;
         })
-        //x position is 3 pixels to the right of the bar
+        .transition(t)
+        .attr("class", "label")
+        .attr("fill", "rgb(0,0,255")
         .attr("x", function (d) {
             return x(d.value) + 3;
         })
@@ -271,10 +307,10 @@ d3.csv("data/dc.csv", function (error, csv) {
         d.SUCRE_POURCENT = +d.Sucre_pourcent;
         d.SEL_PORTION = +d.Sel_portion;
         d.SEL_POURCENT = +d.Sel_pourcent;
-        d.SCORE = +d.score;
         // lim, non presente in csv
 
         // labels
+        d.SCORE = +d.score; // score FSA
         d.NUTRISCORE = [d.NutriScore_color, d.NutriScore_letter];
         d.TRAFFICLIGHT = [d.TL_fat_color, d.TL_AGS_color, d.TL_sugar_color, d.TL_salt_color];
         d.NUTRISCOREPARTIAL = [d.NutriScore_partial_color, d.NutriScore_partial_letter];
@@ -293,14 +329,17 @@ d3.csv("data/dc.csv", function (error, csv) {
 
         // Function that checks Subject uniqueness
         calculateAgeArray(d.SUBJECT, d.AGE);
+
+        
     });
 
     // Store csv data in a global variable
     nutData = csv;
-    // Draw the Bar chart for the first time
-    console.log(fasceEta);
+
     console.log(idpersona);
     console.log(nutData);
+
+    calculateNumberOfProducts(nutData);
     createLeftBarChart();
 });
 
