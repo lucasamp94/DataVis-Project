@@ -32,17 +32,17 @@ function calculateAgeArray(subject, eta) {
 }
 
 
-
-
 function calculateNumberOfProducts(nutData) {
     let univokeProducts = [];
-    let product = {id:"", price:""};
+    let product = { id: "", pricekgl: "", name: "", score: "" };
     product["id"] = nutData[0].CODE;
-    product["price"] = nutData[0].PRICE_KG_L;
+    product["pricekgl"] = nutData[0].PRICE_KG_L;
+    product["name"] = nutData[0].PRODUCT;
+    product["score"] = nutData[0].SCORE;
     univokeProducts.push(product);
     for (let i = 1; i < nutData.length; i++) {
         let exist = false;
-        let product = {id:"", price:""};
+        let product = { id: "", price: "", name: "", score: "" };
         for (let j = 0; j < univokeProducts.length; j++) {
 
             // if ((univokeProducts[j].localeCompare(nutData[i].CODE)) == 0) {
@@ -57,97 +57,20 @@ function calculateNumberOfProducts(nutData) {
         }
         if (exist == false) {
             product["id"] = nutData[i].CODE;
-            product["price"] = nutData[i].PRICE_KG_L;
+            product["pricekgl"] = nutData[i].PRICE_KG_L;
+            product["name"] = nutData[i].PRODUCT;
+            product["score"] = nutData[i].SCORE;
             univokeProducts.push(product);
         }
     }
     console.log(univokeProducts);
+    return univokeProducts;
 }
+
 
 
 // D3 code
 function createLeftBarChart() {
-
-    //     // dimensions and margins of the graph
-    //     let margin = {
-    //         top: 5,
-    //         right: 10,
-    //         bottom: 5,
-    //         left: 40
-    //     }
-
-    //     let width = 200 - margin.left - margin.right;
-    //     let height = 200 - margin.top - margin.bottom;
-    //     let altezzaBar = 30;
-    //     let barPadding = 10;
-    //     // ranges
-    //     let x = d3.scaleLinear()
-    //         .range([0, width]);
-
-    //     let y = d3.scaleBand()
-    //         .range([height, 0])
-    //         .padding(0.1);
-
-    //     // append svg object to body of the page
-    //     let svg = d3.select("#persone").append("svg")
-    //         .attr("id", "svg1")
-    //         .attr("width", width + margin.left + margin.right)
-    //         .attr("height", height + margin.top + margin.bottom)
-    //         .append("g")
-    //         .attr("transform", "translate(" + margin.left + "," + -5 + ")");
-
-    //     // scale
-    //     x.domain([0, d3.max(fasceEta, function (d) {
-    //         return d;
-    //     })]);
-
-    //     y.domain(["60+","50-59","40-49","30-39","20-29"]);
-
-
-    //     // append rectangles for the bar chart
-    //     svg.selectAll(".bar")
-    //         .data(fasceEta)
-    //         .enter().append("rect")
-    //         .attr("class", "bar")
-    //         .attr("fill", "rgb(0,0,255)")
-    //         .attr("width", function (d) {
-    //             return x(d);
-    //         })
-    //         .attr("y", function (d,i) {
-    //             return 150 - (140 - (altezzaBar+barPadding)*i);
-    //         })
-    //         .attr("height", altezzaBar);
-
-    // //     // append text asse y
-    // //     svg.selectAll("g")
-    // //         .data(data)
-    // //         .enter()
-    // //         .append("g")
-    // //         .append("text")
-    // //         .attr("class", "label")
-    // //         .attr("y", barHeight / 2)
-    // //         .attr("dy", ".35em") //vertical align middle
-    // //         .text(function(d){
-    // //             return d.label;
-    // //         }).each(function() {
-    // //     labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
-    // // }); 
-
-    //         let yAxis = d3.axisLeft()
-    //             .scale(y)
-    //             .ticks(5);
-
-    //     // create Y axis
-    //         d3.select("#svg1").append("g")
-    //         .attr("class", "y axis")
-    //         .attr("transform", "translate(0,0)")
-    //         .call(yAxis)
-    //         .selectAll("text")
-    //         .attr("y", 0)
-    //         .attr("x", 0)
-    //         .attr("dy", ".35em")
-    //         .style("text-anchor", "start");
-
     var data = [{
         "name": "60+",
         "value": fasceEta[4],
@@ -193,11 +116,11 @@ function createLeftBarChart() {
             return d.value;
         })]);
 
-   var y = d3.scaleBand()
+    var y = d3.scaleBand()
         .range([height, 0], .1)
         .domain(data.map(function (d) {
             return d.name;
-        })); 
+        }));
 
 
     //make y axis to show bar names
@@ -226,8 +149,8 @@ function createLeftBarChart() {
         })
         .transition(t)
         .attr("class", "bar")
-        .attr("fill", "rgb(0,0,255)")
-        .attr("height", y.bandwidth()-barPadding)
+        .attr("fill", "#69b3a2")
+        .attr("height", y.bandwidth() - barPadding)
         .attr("x", 0)
         .attr("width", function (d) {
             return x(d.value);
@@ -240,7 +163,7 @@ function createLeftBarChart() {
         })
         .transition(t)
         .attr("class", "label")
-        .attr("fill", "rgb(0,0,255")
+        .attr("fill", "#69b3a2")
         .attr("x", function (d) {
             return x(d.value) + 3;
         })
@@ -251,6 +174,213 @@ function createLeftBarChart() {
     d3.select(".domain").remove();
 
 };
+
+// function createMidScatterplot() {
+//     var margin = { top: 30, right: 50, bottom: 40, left: 40 };
+//     var width = 960 - margin.left - margin.right;
+//     var height = 500 - margin.top - margin.bottom;
+
+//     var svg = d3.select('#scatterplot')
+//         .append('svg')
+//         .attr('width', width + margin.left + margin.right)
+//         .attr('height', height + margin.top + margin.bottom)
+//         .append('g')
+//         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+
+//     // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
+//     var xScale = d3.scaleLinear()
+//         .range([0, width]);
+
+//     var yScale = d3.scaleLinear()
+//         .range([height, 0]);
+
+//     // square root scale.
+//     var radius = d3.scaleSqrt()
+//         .range([2, 5]);
+
+//     // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
+//     var xAxis = d3.axisBottom()
+//         .scale(xScale);
+
+//     var yAxis = d3.axisLeft()
+//         .scale(yScale);
+
+//     // again scaleOrdinal
+//     var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+//     xScale.domain(d3.extent(nutData, function (d) {
+//         return d.SCORE;
+//     })).nice();
+
+//     yScale.domain(d3.extent(nutData, function (d) {
+//         return d.PRICE_KG_L;
+//     })).nice();
+
+//     // grandezza bubble, esempio numero di prodotti acquistati
+//     // radius.domain(d3.extent(data, function (d) {
+//     //     return d.PetalLength;
+//     // })).nice();
+
+//     // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis. 
+//     svg.append('g')
+//         .attr('transform', 'translate(0,' + height + ')')
+//         .attr('class', 'x axis')
+//         .call(xAxis);
+
+//     // y-axis is translated to (0,0)
+//     svg.append('g')
+//         .attr('transform', 'translate(0,0)')
+//         .attr('class', 'y axis')
+//         .call(yAxis);
+
+
+//     var bubble = svg.selectAll('.bubble')
+//         .data(nutData)
+//         .enter().append('circle')
+//         .attr('class', 'bubble')
+//         .attr('cx', function (d) { return xScale(d.SCORE); })
+//         .attr('cy', function (d) { return yScale(d.PRICE_KG_L); });
+//     // .attr('r', function (d) { return radius(d.PetalLength); })
+//     // .style('fill', function (d) { return color(d.Species); });
+
+//     bubble.append('title')
+//         .attr('x', function (d) { return radius(d.SCORE); })
+//         .text(function (d) {
+//             return d.PRODUCT;
+//         });
+
+//     // adding label. For x-axis, it's at (10, 10), and for y-axis at (width, height-10).
+//     // Label Y-axis
+//     svg.append('text')
+//         .attr('x', 10)
+//         .attr('y', 10)
+//         .attr('class', 'label')
+//         .text('Price €/Kg €/L');
+
+//     // Label X-axis
+//     svg.append('text')
+//         .attr('x', width)
+//         .attr('y', height - 10)
+//         .attr('text-anchor', 'end')
+//         .attr('class', 'label')
+//         .text('Score FSA');
+
+//     // // define a group element for each color i, and translate it to (0, i * 20). 
+//     // var legend = svg.selectAll('legend')
+//     //     .data(color.domain())
+//     //     .enter().append('g')
+//     //     .attr('class', 'legend')
+//     //     .attr('transform', function (d, i) { return 'translate(0,' + i * 20 + ')'; });
+
+//     // // give x value equal to the legend elements. 
+//     // // no need to define a function for fill, this is automatically fill by color.
+//     // legend.append('rect')
+//     //     .attr('x', width)
+//     //     .attr('width', 18)
+//     //     .attr('height', 18)
+//     //     .style('fill', color);
+
+//     // // add text to the legend elements.
+//     // // rects are defined at x value equal to width, we define text at width - 6, this will print name of the legends before the rects.
+//     // legend.append('text')
+//     //     .attr('x', width - 6)
+//     //     .attr('y', 9)
+//     //     .attr('dy', '.35em')
+//     //     .style('text-anchor', 'end')
+//     //     .text(function (d) { return d; });
+
+
+//     // // d3 has a filter fnction similar to filter function in JS. Here it is used to filter d3 components.
+//     // legend.on('click', function (type) {
+//     //     d3.selectAll('.bubble')
+//     //         .style('opacity', 0.15)
+//     //         .filter(function (d) {
+//     //             return d.Species == type;
+//     //         })
+//     //         .style('opacity', 1);
+//     // })
+
+
+// };
+
+function createMidScatterplot2() {
+
+    let nutProducts = calculateNumberOfProducts(nutData);
+
+    // set the dimensions and margins of the graph
+    var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+        width = 460 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#scatterplot")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+
+    // Add X axis
+    var x = d3.scaleLinear()
+        .domain([d3.min(nutProducts, function (d) { return d.score-3; }), d3.max(nutProducts, function (d) { return d.score+3; })])
+        .range([0, width]);
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+        .domain([d3.min(nutProducts, function (d) { return d.pricekgl; }), d3.max(nutProducts, function (d) { return d.pricekgl+1.33; })])
+        .range([height, 0]);
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+
+    // Add dots
+    svg.append('g')
+        .selectAll("dot")
+        .data(nutProducts)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return x(d.score); })
+        .attr("cy", function (d) { return y(d.pricekgl); })
+        .attr("r", 3)
+        .attr("id", function (d) { return d.id;})
+        .style("fill", "#69b3a2")
+        .on("mouseover", function () {                      // <--- non funziona, da fixare
+            d3.selectAll("dot")
+                .attr("fill", "rgb=(255,0,0)");
+            loadInfo(nutProducts, event.target.id);
+        })
+
+    // Label Y-axis
+    svg.append('text')
+        .attr('x', 10)
+        .attr('y', 10)
+        .attr('class', 'label')
+        .text('Price €/Kg €/L');
+
+    // Label X-axis
+    svg.append('text')
+        .attr('x', width)
+        .attr('y', height - 10)
+        .attr('text-anchor', 'end')
+        .attr('class', 'label')
+        .text('Score FSA');
+}
+
+function loadInfo(nutProducts, dotId) {
+    for (let i = 0; i < nutProducts.length; i++) {
+        if (nutProducts[i] == dotId) {
+            document.getElementById("name").innerHTML = nutProducts[i].name;
+            document.getElementById("score").innerHTML = nutProducts[i].score;
+            document.getElementById("pricekgl").innerHTML = nutProducts[i].pricekgl;
+        }
+    }
+}
 
 
 // Load CSV file
@@ -330,7 +460,7 @@ d3.csv("data/dc.csv", function (error, csv) {
         // Function that checks Subject uniqueness
         calculateAgeArray(d.SUBJECT, d.AGE);
 
-        
+
     });
 
     // Store csv data in a global variable
@@ -341,5 +471,6 @@ d3.csv("data/dc.csv", function (error, csv) {
 
     calculateNumberOfProducts(nutData);
     createLeftBarChart();
+    createMidScatterplot2();
 });
 
