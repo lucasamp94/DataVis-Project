@@ -1,7 +1,16 @@
 /* Part of W3css */
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-    
-body, html {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+body,
+html {
   padding-top: 30px;
   height: 100%;
   line-height: 1.8;
@@ -14,5 +23,11 @@ body, html {
 /* My css */
 .label {
   font-family: "Raleway", sans-serif;
-  font-size: 12px ;
+  font-size: 12px;
+}
+
+.subtitleprod {
+  font-family: "Raleway", sans-serif;
+  font-size: large;
+  text-align: left;
 }

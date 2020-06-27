@@ -2,6 +2,7 @@
 let nutData;
 let fasceEta = [0, 0, 0, 0, 0];
 let idpersona = [];
+let lastId = null;
 
 
 function calculateAgeArray(subject, eta) {
@@ -39,6 +40,15 @@ function calculateNumberOfProducts(nutData) {
     product["pricekgl"] = nutData[0].PRICE_KG_L;
     product["name"] = nutData[0].PRODUCT;
     product["score"] = nutData[0].SCORE;
+    product["kcal100g"] = nutData[0].KCAL_100G;
+    product["lipides100g"] = nutData[0].LIPIDES_100G;
+    product["ags100g"] = nutData[0].AGS_100G;
+    product["glucides100g"] = nutData[0].GLUCIDES_100G;
+    product["sucres100g"] = nutData[0].SUCRES_100G;
+    product["proteines100g"] = nutData[0].PROTEINES_100G;
+    product["sel100g"] = nutData[0].SEL_100G;
+    product["fibres100g"] = nutData[0].FIBRES_100G;
+
     univokeProducts.push(product);
     for (let i = 1; i < nutData.length; i++) {
         let exist = false;
@@ -60,10 +70,18 @@ function calculateNumberOfProducts(nutData) {
             product["pricekgl"] = nutData[i].PRICE_KG_L;
             product["name"] = nutData[i].PRODUCT;
             product["score"] = nutData[i].SCORE;
+            product["kcal100g"] = nutData[i].KCAL_100G;
+            product["lipides100g"] = nutData[i].LIPIDES_100G;
+            product["ags100g"] = nutData[i].AGS_100G;
+            product["glucides100g"] = nutData[i].GLUCIDES_100G;
+            product["sucres100g"] = nutData[i].SUCRES_100G;
+            product["proteines100g"] = nutData[i].PROTEINES_100G;
+            product["sel100g"] = nutData[i].SEL_100G;
+            product["fibres100g"] = nutData[i].FIBRES_100G;
             univokeProducts.push(product);
         }
     }
-    console.log(univokeProducts);
+    //console.log(univokeProducts);
     return univokeProducts;
 }
 
@@ -325,7 +343,7 @@ function createMidScatterplot2() {
 
     // Add X axis
     var x = d3.scaleLinear()
-        .domain([d3.min(nutProducts, function (d) { return d.score-3; }), d3.max(nutProducts, function (d) { return d.score+3; })])
+        .domain([d3.min(nutProducts, function (d) { return d.score - 3; }), d3.max(nutProducts, function (d) { return d.score + 3; })])
         .range([0, width]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -333,13 +351,14 @@ function createMidScatterplot2() {
 
     // Add Y axis
     var y = d3.scaleLinear()
-        .domain([d3.min(nutProducts, function (d) { return d.pricekgl; }), d3.max(nutProducts, function (d) { return d.pricekgl+1.33; })])
+        .domain([d3.min(nutProducts, function (d) { return d.pricekgl; }), d3.max(nutProducts, function (d) { return d.pricekgl + 1.33; })])
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
 
 
     // Add dots
+
     svg.append('g')
         .selectAll("dot")
         .data(nutProducts)
@@ -348,13 +367,21 @@ function createMidScatterplot2() {
         .attr("cx", function (d) { return x(d.score); })
         .attr("cy", function (d) { return y(d.pricekgl); })
         .attr("r", 3)
-        .attr("id", function (d) { return d.id;})
+        .attr("id", function (d) { return d.id; })
         .style("fill", "#69b3a2")
-        .on("mouseover", function () {                      // <--- non funziona, da fixare
-            d3.selectAll("dot")
-                .attr("fill", "rgb=(255,0,0)");
+        .on("mouseover", function () {
+            if (lastId != null) {
+                d3.select('[id='+'\"'+lastId+'\"'+']').style("fill", "#69b3a2");
+                d3.select('[id='+'\"'+lastId+'\"'+']').attr("r", 3);
+                //console.log("id selezionato: ", event.target.id);
+            }
+            //console.log("last id: ", lastId);
+            d3.select(this).style("fill", "red");
+            d3.select(this).attr("r", 3*2);
             loadInfo(nutProducts, event.target.id);
+            lastId = event.target.id;
         })
+
 
     // Label Y-axis
     svg.append('text')
@@ -374,10 +401,19 @@ function createMidScatterplot2() {
 
 function loadInfo(nutProducts, dotId) {
     for (let i = 0; i < nutProducts.length; i++) {
-        if (nutProducts[i] == dotId) {
+        if (nutProducts[i].id == dotId) {
             document.getElementById("name").innerHTML = nutProducts[i].name;
             document.getElementById("score").innerHTML = nutProducts[i].score;
-            document.getElementById("pricekgl").innerHTML = nutProducts[i].pricekgl;
+            document.getElementById("pricekgl").innerHTML = nutProducts[i].pricekgl + " €";
+            document.getElementById("energy").innerHTML = nutProducts[i].kcal100g + " Kcal";
+            document.getElementById("protein").innerHTML = nutProducts[i].proteines100g + " g";
+            document.getElementById("glucides").innerHTML = nutProducts[i].glucides100g + " g";
+            document.getElementById("sucres").innerHTML = nutProducts[i].sucres100g + " g";
+            document.getElementById("lipides").innerHTML = nutProducts[i].lipides100g + " g";
+            document.getElementById("ags").innerHTML = nutProducts[i].ags100g + " g";
+            document.getElementById("fibers").innerHTML = nutProducts[i].fibres100g + " g";
+            document.getElementById("salt").innerHTML = nutProducts[i].sel100g + " g";
+            
         }
     }
 }
