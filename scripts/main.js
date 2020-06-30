@@ -3,6 +3,8 @@ let nutData;
 let fasceEta = [0, 0, 0, 0, 0];
 let idpersona = [];
 let lastId = null;
+let caddy1 = [];
+let caddy2 = [];
 
 
 function calculateAgeArray(subject, eta) {
@@ -85,7 +87,258 @@ function calculateNumberOfProducts(nutData) {
     return univokeProducts;
 }
 
+function initInfo() {
+    document.getElementById("name").innerHTML = "-";
+    document.getElementById("score").innerHTML = "-";
+    document.getElementById("pricekgl").innerHTML = "-";
+    document.getElementById("energy").innerHTML = "-";
+    document.getElementById("protein").innerHTML = "-";
+    document.getElementById("glucides").innerHTML = "-";
+    document.getElementById("sucres").innerHTML = "-";
+    document.getElementById("lipides").innerHTML = "-";
+    document.getElementById("ags").innerHTML = "-";
+    document.getElementById("fibers").innerHTML = "-";
+    document.getElementById("salt").innerHTML = "-";
+}
 
+function loadInfo(nutProducts, dotId) {
+    for (let i = 0; i < nutProducts.length; i++) {
+        if (nutProducts[i].id == dotId) {
+            document.getElementById("name").innerHTML = nutProducts[i].name;
+            document.getElementById("score").innerHTML = nutProducts[i].score;
+            document.getElementById("pricekgl").innerHTML = nutProducts[i].pricekgl + " €";
+            document.getElementById("energy").innerHTML = nutProducts[i].kcal100g + " kcal";
+            document.getElementById("protein").innerHTML = nutProducts[i].proteines100g + " g";
+            document.getElementById("glucides").innerHTML = nutProducts[i].glucides100g + " g";
+            document.getElementById("sucres").innerHTML = nutProducts[i].sucres100g + " g";
+            document.getElementById("lipides").innerHTML = nutProducts[i].lipides100g + " g";
+            document.getElementById("ags").innerHTML = nutProducts[i].ags100g + " g";
+            document.getElementById("fibers").innerHTML = nutProducts[i].fibres100g + " g";
+            document.getElementById("salt").innerHTML = nutProducts[i].sel100g + " g";
+
+        }
+    }
+}
+
+function caddyFilterBought(nutData) {
+    caddy1 = [];
+    caddy2 = [];
+    let senzaetk = 0;
+    let conetk = 0;
+    for (let i = 0; i < nutData.length; i++) {
+        if (nutData[i].BOUGHTPRODUCT == 1) {
+            if (nutData[i].CADDY == 1) {
+                caddy1[senzaetk] = nutData[i];
+                senzaetk++;
+            } else if (nutData[i].CADDY == 2) {
+                caddy2[conetk] = nutData[i];
+                conetk++;
+            } else {
+                console.log(nutData[i]);
+            }
+        }
+    }
+    console.log(caddy1);
+    console.log(caddy2);
+}
+
+function filterAge5C(nutData) {
+    caddyFilterBought(nutData);
+
+    // NutriScore
+    let A = [0, 0, 0, 0, 0];
+    let B = [0, 0, 0, 0, 0];
+    let C = [0, 0, 0, 0, 0];
+    let D = [0, 0, 0, 0, 0];
+    let E = [0, 0, 0, 0, 0];
+    for (let i = 0; i < caddy1.length; i++) {
+        if (caddy1[i].TREATMENT.localeCompare("5C") == 0) {
+            if (caddy1[i].NUTRISCORE[1].localeCompare("A") == 0) {
+                if (caddy1[i].AGE < 30) {
+                    A[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy1[i].AGE < 40) {
+                    A[1] += caddy1[i].NPRODUCTS; //30+
+                }
+                else if (caddy1[i].AGE < 50) {
+                    A[2] += caddy1[i].NPRODUCTS; // 40+
+                }
+                else if (caddy1[i].AGE < 60) {
+                    A[3] += caddy1[i].NPRODUCTS; // 50+
+                }
+                else {
+                    A[4] += caddy1[i].NPRODUCTS; // 60+
+                }
+
+            } else if (caddy1[i].NUTRISCORE[1].localeCompare("B") == 0) {
+                if (caddy1[i].AGE < 30) {
+                    B[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy1[i].AGE < 40) {
+                    B[1] += caddy1[i].NPRODUCTS; //30+
+                }
+                else if (caddy1[i].AGE < 50) {
+                    B[2] += caddy1[i].NPRODUCTS; // 40+
+                }
+                else if (caddy1[i].AGE < 60) {
+                    B[3] += caddy1[i].NPRODUCTS; // 50+
+                }
+                else {
+                    B[4] += caddy1[i].NPRODUCTS; // 60+
+                }
+            } else if (caddy1[i].NUTRISCORE[1].localeCompare("C") == 0) {
+                if (caddy1[i].AGE < 30) {
+                    C[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy1[i].AGE < 40) {
+                    C[1] += caddy1[i].NPRODUCTS; //30+
+                }
+                else if (caddy1[i].AGE < 50) {
+                    C[2] += caddy1[i].NPRODUCTS; // 40+
+                }
+                else if (caddy1[i].AGE < 60) {
+                    C[3] += caddy1[i].NPRODUCTS; // 50+
+                }
+                else {
+                    C[4] += caddy1[i].NPRODUCTS; // 60+
+                }
+            } else if (caddy1[i].NUTRISCORE[1].localeCompare("D") == 0) {
+                if (caddy1[i].AGE < 30) {
+                    D[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy1[i].AGE < 40) {
+                    D[1] += caddy1[i].NPRODUCTS; //30+
+                }
+                else if (caddy1[i].AGE < 50) {
+                    D[2] += caddy1[i].NPRODUCTS; // 40+
+                }
+                else if (caddy1[i].AGE < 60) {
+                    D[3] += caddy1[i].NPRODUCTS; // 50+
+                }
+                else {
+                    D[4] += caddy1[i].NPRODUCTS; // 60+
+                }
+            } else if (caddy1[i].NUTRISCORE[1].localeCompare("E") == 0) {
+                if (caddy1[i].AGE < 30) {
+                    E[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy1[i].AGE < 40) {
+                    E[1] += caddy1[i].NPRODUCTS; //30+
+                }
+                else if (caddy1[i].AGE < 50) {
+                    E[2] += caddy1[i].NPRODUCTS; // 40+
+                }
+                else if (caddy1[i].AGE < 60) {
+                    E[3] += caddy1[i].NPRODUCTS; // 50+
+                }
+                else {
+                    E[4] += caddy1[i].NPRODUCTS; // 60+
+                }
+            }
+        }
+
+    }
+    for (let i = 0; i < caddy2.length; i++) {
+        if (caddy2[i].TREATMENT.localeCompare("5C") == 0) {
+            if (caddy2[i].NUTRISCORE[1].localeCompare("A") == 0) {
+                if (caddy2[i].AGE < 30) {
+                    A[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy2[i].AGE < 40) {
+                    A[1] -= caddy2[i].NPRODUCTS; //30+
+                }
+                else if (caddy2[i].AGE < 50) {
+                    A[2] -= caddy2[i].NPRODUCTS; // 40+
+                }
+                else if (caddy2[i].AGE < 60) {
+                    A[3] -= caddy2[i].NPRODUCTS; // 50+
+                }
+                else {
+                    A[4] -= caddy2[i].NPRODUCTS; // 60+
+                }
+
+            } else if (caddy2[i].NUTRISCORE[1].localeCompare("B") == 0) {
+                if (caddy2[i].AGE < 30) {
+                    B[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy2[i].AGE < 40) {
+                    B[1] -= caddy2[i].NPRODUCTS; //30+
+                }
+                else if (caddy2[i].AGE < 50) {
+                    B[2] -= caddy2[i].NPRODUCTS; // 40+
+                }
+                else if (caddy2[i].AGE < 60) {
+                    B[3] -= caddy2[i].NPRODUCTS; // 50+
+                }
+                else {
+                    B[4] -= caddy2[i].NPRODUCTS; // 60+
+                }
+            } else if (caddy2[i].NUTRISCORE[1].localeCompare("C") == 0) {
+                if (caddy2[i].AGE < 30) {
+                    C[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy2[i].AGE < 40) {
+                    C[1] -= caddy2[i].NPRODUCTS; //30+
+                }
+                else if (caddy2[i].AGE < 50) {
+                    C[2] -= caddy2[i].NPRODUCTS; // 40+
+                }
+                else if (caddy2[i].AGE < 60) {
+                    C[3] -= caddy2[i].NPRODUCTS; // 50+
+                }
+                else {
+                    C[4] -= caddy2[i].NPRODUCTS; // 60+
+                }
+            } else if (caddy2[i].NUTRISCORE[1].localeCompare("D") == 0) {
+                if (caddy2[i].AGE < 30) {
+                    D[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy2[i].AGE < 40) {
+                    D[1] -= caddy2[i].NPRODUCTS; //30+
+                }
+                else if (caddy2[i].AGE < 50) {
+                    D[2] -= caddy2[i].NPRODUCTS; // 40+
+                }
+                else if (caddy2[i].AGE < 60) {
+                    D[3] -= caddy2[i].NPRODUCTS; // 50+
+                }
+                else {
+                    D[4] -= caddy2[i].NPRODUCTS; // 60+
+                }
+            } else if (caddy2[i].NUTRISCORE[1].localeCompare("E") == 0) {
+                if (caddy2[i].AGE < 30) {
+                    E[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                }
+                else if (caddy2[i].AGE < 40) {
+                    E[1] -= caddy2[i].NPRODUCTS; //30+
+                }
+                else if (caddy2[i].AGE < 50) {
+                    E[2] -= caddy2[i].NPRODUCTS; // 40+
+                }
+                else if (caddy2[i].AGE < 60) {
+                    E[3] -= caddy2[i].NPRODUCTS; // 50+
+                }
+                else {
+                    E[4] -= caddy2[i].NPRODUCTS; // 60+
+                }
+            }
+        }
+    }
+    console.log(A);
+    console.log(B);
+    console.log(C);
+    console.log(D);
+    console.log(E);
+}
+
+function filterAgeTL(nutData) {
+    // DA FARE
+}
+
+function filterAgeRIGDA(nutData) {
+    // DA FARE - RI reference intake per donne
+    // GDA guideline daily amounts per tutti
+}
 
 // D3 code
 function createLeftBarChart() {
@@ -193,142 +446,13 @@ function createLeftBarChart() {
 
 };
 
-// function createMidScatterplot() {
-//     var margin = { top: 30, right: 50, bottom: 40, left: 40 };
-//     var width = 960 - margin.left - margin.right;
-//     var height = 500 - margin.top - margin.bottom;
-
-//     var svg = d3.select('#scatterplot')
-//         .append('svg')
-//         .attr('width', width + margin.left + margin.right)
-//         .attr('height', height + margin.top + margin.bottom)
-//         .append('g')
-//         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-
-//     // The API for scales have changed in v4. There is a separate module d3-scale which can be used instead. The main change here is instead of d3.scale.linear, we have d3.scaleLinear.
-//     var xScale = d3.scaleLinear()
-//         .range([0, width]);
-
-//     var yScale = d3.scaleLinear()
-//         .range([height, 0]);
-
-//     // square root scale.
-//     var radius = d3.scaleSqrt()
-//         .range([2, 5]);
-
-//     // the axes are much cleaner and easier now. No need to rotate and orient the axis, just call axisBottom, axisLeft etc.
-//     var xAxis = d3.axisBottom()
-//         .scale(xScale);
-
-//     var yAxis = d3.axisLeft()
-//         .scale(yScale);
-
-//     // again scaleOrdinal
-//     var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-//     xScale.domain(d3.extent(nutData, function (d) {
-//         return d.SCORE;
-//     })).nice();
-
-//     yScale.domain(d3.extent(nutData, function (d) {
-//         return d.PRICE_KG_L;
-//     })).nice();
-
-//     // grandezza bubble, esempio numero di prodotti acquistati
-//     // radius.domain(d3.extent(data, function (d) {
-//     //     return d.PetalLength;
-//     // })).nice();
-
-//     // adding axes is also simpler now, just translate x-axis to (0,height) and it's alread defined to be a bottom axis. 
-//     svg.append('g')
-//         .attr('transform', 'translate(0,' + height + ')')
-//         .attr('class', 'x axis')
-//         .call(xAxis);
-
-//     // y-axis is translated to (0,0)
-//     svg.append('g')
-//         .attr('transform', 'translate(0,0)')
-//         .attr('class', 'y axis')
-//         .call(yAxis);
-
-
-//     var bubble = svg.selectAll('.bubble')
-//         .data(nutData)
-//         .enter().append('circle')
-//         .attr('class', 'bubble')
-//         .attr('cx', function (d) { return xScale(d.SCORE); })
-//         .attr('cy', function (d) { return yScale(d.PRICE_KG_L); });
-//     // .attr('r', function (d) { return radius(d.PetalLength); })
-//     // .style('fill', function (d) { return color(d.Species); });
-
-//     bubble.append('title')
-//         .attr('x', function (d) { return radius(d.SCORE); })
-//         .text(function (d) {
-//             return d.PRODUCT;
-//         });
-
-//     // adding label. For x-axis, it's at (10, 10), and for y-axis at (width, height-10).
-//     // Label Y-axis
-//     svg.append('text')
-//         .attr('x', 10)
-//         .attr('y', 10)
-//         .attr('class', 'label')
-//         .text('Price €/Kg €/L');
-
-//     // Label X-axis
-//     svg.append('text')
-//         .attr('x', width)
-//         .attr('y', height - 10)
-//         .attr('text-anchor', 'end')
-//         .attr('class', 'label')
-//         .text('Score FSA');
-
-//     // // define a group element for each color i, and translate it to (0, i * 20). 
-//     // var legend = svg.selectAll('legend')
-//     //     .data(color.domain())
-//     //     .enter().append('g')
-//     //     .attr('class', 'legend')
-//     //     .attr('transform', function (d, i) { return 'translate(0,' + i * 20 + ')'; });
-
-//     // // give x value equal to the legend elements. 
-//     // // no need to define a function for fill, this is automatically fill by color.
-//     // legend.append('rect')
-//     //     .attr('x', width)
-//     //     .attr('width', 18)
-//     //     .attr('height', 18)
-//     //     .style('fill', color);
-
-//     // // add text to the legend elements.
-//     // // rects are defined at x value equal to width, we define text at width - 6, this will print name of the legends before the rects.
-//     // legend.append('text')
-//     //     .attr('x', width - 6)
-//     //     .attr('y', 9)
-//     //     .attr('dy', '.35em')
-//     //     .style('text-anchor', 'end')
-//     //     .text(function (d) { return d; });
-
-
-//     // // d3 has a filter fnction similar to filter function in JS. Here it is used to filter d3 components.
-//     // legend.on('click', function (type) {
-//     //     d3.selectAll('.bubble')
-//     //         .style('opacity', 0.15)
-//     //         .filter(function (d) {
-//     //             return d.Species == type;
-//     //         })
-//     //         .style('opacity', 1);
-//     // })
-
-
-// };
-
 function createMidScatterplot2() {
 
     let nutProducts = calculateNumberOfProducts(nutData);
 
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 460 - margin.left - margin.right,
+        width = 800 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
@@ -371,13 +495,13 @@ function createMidScatterplot2() {
         .style("fill", "#69b3a2")
         .on("mouseover", function () {
             if (lastId != null) {
-                d3.select('[id='+'\"'+lastId+'\"'+']').style("fill", "#69b3a2");
-                d3.select('[id='+'\"'+lastId+'\"'+']').attr("r", 3);
+                d3.select('[id=' + '\"' + lastId + '\"' + ']').style("fill", "#69b3a2");
+                d3.select('[id=' + '\"' + lastId + '\"' + ']').attr("r", 3);
                 //console.log("id selezionato: ", event.target.id);
             }
             //console.log("last id: ", lastId);
             d3.select(this).style("fill", "red");
-            d3.select(this).attr("r", 3*2);
+            d3.select(this).attr("r", 3 * 2);
             loadInfo(nutProducts, event.target.id);
             lastId = event.target.id;
         })
@@ -399,24 +523,10 @@ function createMidScatterplot2() {
         .text('Score FSA');
 }
 
-function loadInfo(nutProducts, dotId) {
-    for (let i = 0; i < nutProducts.length; i++) {
-        if (nutProducts[i].id == dotId) {
-            document.getElementById("name").innerHTML = nutProducts[i].name;
-            document.getElementById("score").innerHTML = nutProducts[i].score;
-            document.getElementById("pricekgl").innerHTML = nutProducts[i].pricekgl + " €";
-            document.getElementById("energy").innerHTML = nutProducts[i].kcal100g + " Kcal";
-            document.getElementById("protein").innerHTML = nutProducts[i].proteines100g + " g";
-            document.getElementById("glucides").innerHTML = nutProducts[i].glucides100g + " g";
-            document.getElementById("sucres").innerHTML = nutProducts[i].sucres100g + " g";
-            document.getElementById("lipides").innerHTML = nutProducts[i].lipides100g + " g";
-            document.getElementById("ags").innerHTML = nutProducts[i].ags100g + " g";
-            document.getElementById("fibers").innerHTML = nutProducts[i].fibres100g + " g";
-            document.getElementById("salt").innerHTML = nutProducts[i].sel100g + " g";
-            
-        }
-    }
+function createLabelChart() {
+
 }
+
 
 
 // Load CSV file
@@ -502,11 +612,10 @@ d3.csv("data/dc.csv", function (error, csv) {
     // Store csv data in a global variable
     nutData = csv;
 
-    console.log(idpersona);
-    console.log(nutData);
-
     calculateNumberOfProducts(nutData);
     createLeftBarChart();
     createMidScatterplot2();
+    caddyFilterBought(nutData);
+    filterAge5C(nutData);
 });
 

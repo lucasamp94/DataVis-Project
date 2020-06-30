@@ -31,3 +31,9 @@ html {
   font-size: large;
   text-align: left;
 }
+
+.prodname {
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
