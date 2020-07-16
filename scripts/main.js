@@ -155,84 +155,84 @@ function filterAge5C(nutData) {
         if (caddy1[i].TREATMENT.localeCompare("5C") == 0) {
             if (caddy1[i].NUTRISCORE[1].localeCompare("A") == 0) {
                 if (caddy1[i].AGE < 30) {
-                    A[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    A[0] -= caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy1[i].AGE < 40) {
-                    A[1] += caddy1[i].NPRODUCTS; //30+
+                    A[1] -= caddy1[i].NPRODUCTS; //30+
                 }
                 else if (caddy1[i].AGE < 50) {
-                    A[2] += caddy1[i].NPRODUCTS; // 40+
+                    A[2] -= caddy1[i].NPRODUCTS; // 40+
                 }
                 else if (caddy1[i].AGE < 60) {
-                    A[3] += caddy1[i].NPRODUCTS; // 50+
+                    A[3] -= caddy1[i].NPRODUCTS; // 50+
                 }
                 else {
-                    A[4] += caddy1[i].NPRODUCTS; // 60+
+                    A[4] -= caddy1[i].NPRODUCTS; // 60+
                 }
 
             } else if (caddy1[i].NUTRISCORE[1].localeCompare("B") == 0) {
                 if (caddy1[i].AGE < 30) {
-                    B[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    B[0] -= caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy1[i].AGE < 40) {
-                    B[1] += caddy1[i].NPRODUCTS; //30+
+                    B[1] -= caddy1[i].NPRODUCTS; //30+
                 }
                 else if (caddy1[i].AGE < 50) {
-                    B[2] += caddy1[i].NPRODUCTS; // 40+
+                    B[2] -= caddy1[i].NPRODUCTS; // 40+
                 }
                 else if (caddy1[i].AGE < 60) {
-                    B[3] += caddy1[i].NPRODUCTS; // 50+
+                    B[3] -= caddy1[i].NPRODUCTS; // 50+
                 }
                 else {
-                    B[4] += caddy1[i].NPRODUCTS; // 60+
+                    B[4] -= caddy1[i].NPRODUCTS; // 60+
                 }
             } else if (caddy1[i].NUTRISCORE[1].localeCompare("C") == 0) {
                 if (caddy1[i].AGE < 30) {
-                    C[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    C[0] -= caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy1[i].AGE < 40) {
-                    C[1] += caddy1[i].NPRODUCTS; //30+
+                    C[1] -= caddy1[i].NPRODUCTS; //30+
                 }
                 else if (caddy1[i].AGE < 50) {
-                    C[2] += caddy1[i].NPRODUCTS; // 40+
+                    C[2] -= caddy1[i].NPRODUCTS; // 40+
                 }
                 else if (caddy1[i].AGE < 60) {
-                    C[3] += caddy1[i].NPRODUCTS; // 50+
+                    C[3] -= caddy1[i].NPRODUCTS; // 50+
                 }
                 else {
-                    C[4] += caddy1[i].NPRODUCTS; // 60+
+                    C[4] -= caddy1[i].NPRODUCTS; // 60+
                 }
             } else if (caddy1[i].NUTRISCORE[1].localeCompare("D") == 0) {
                 if (caddy1[i].AGE < 30) {
-                    D[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    D[0] -= caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy1[i].AGE < 40) {
-                    D[1] += caddy1[i].NPRODUCTS; //30+
+                    D[1] -= caddy1[i].NPRODUCTS; //30+
                 }
                 else if (caddy1[i].AGE < 50) {
-                    D[2] += caddy1[i].NPRODUCTS; // 40+
+                    D[2] -= caddy1[i].NPRODUCTS; // 40+
                 }
                 else if (caddy1[i].AGE < 60) {
-                    D[3] += caddy1[i].NPRODUCTS; // 50+
+                    D[3] -= caddy1[i].NPRODUCTS; // 50+
                 }
                 else {
-                    D[4] += caddy1[i].NPRODUCTS; // 60+
+                    D[4] -= caddy1[i].NPRODUCTS; // 60+
                 }
             } else if (caddy1[i].NUTRISCORE[1].localeCompare("E") == 0) {
                 if (caddy1[i].AGE < 30) {
-                    E[0] += caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    E[0] -= caddy1[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy1[i].AGE < 40) {
-                    E[1] += caddy1[i].NPRODUCTS; //30+
+                    E[1] -= caddy1[i].NPRODUCTS; //30+
                 }
                 else if (caddy1[i].AGE < 50) {
-                    E[2] += caddy1[i].NPRODUCTS; // 40+
+                    E[2] -= caddy1[i].NPRODUCTS; // 40+
                 }
                 else if (caddy1[i].AGE < 60) {
-                    E[3] += caddy1[i].NPRODUCTS; // 50+
+                    E[3] -= caddy1[i].NPRODUCTS; // 50+
                 }
                 else {
-                    E[4] += caddy1[i].NPRODUCTS; // 60+
+                    E[4] -= caddy1[i].NPRODUCTS; // 60+
                 }
             }
         }
@@ -242,88 +242,89 @@ function filterAge5C(nutData) {
         if (caddy2[i].TREATMENT.localeCompare("5C") == 0) {
             if (caddy2[i].NUTRISCORE[1].localeCompare("A") == 0) {
                 if (caddy2[i].AGE < 30) {
-                    A[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    A[0] += caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy2[i].AGE < 40) {
-                    A[1] -= caddy2[i].NPRODUCTS; //30+
+                    A[1] += caddy2[i].NPRODUCTS; //30+
                 }
                 else if (caddy2[i].AGE < 50) {
-                    A[2] -= caddy2[i].NPRODUCTS; // 40+
+                    A[2] += caddy2[i].NPRODUCTS; // 40+
                 }
                 else if (caddy2[i].AGE < 60) {
-                    A[3] -= caddy2[i].NPRODUCTS; // 50+
+                    A[3] += caddy2[i].NPRODUCTS; // 50+
                 }
                 else {
-                    A[4] -= caddy2[i].NPRODUCTS; // 60+
+                    A[4] += caddy2[i].NPRODUCTS; // 60+
                 }
 
             } else if (caddy2[i].NUTRISCORE[1].localeCompare("B") == 0) {
                 if (caddy2[i].AGE < 30) {
-                    B[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    B[0] += caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy2[i].AGE < 40) {
-                    B[1] -= caddy2[i].NPRODUCTS; //30+
+                    B[1] += caddy2[i].NPRODUCTS; //30+
                 }
                 else if (caddy2[i].AGE < 50) {
-                    B[2] -= caddy2[i].NPRODUCTS; // 40+
+                    B[2] += caddy2[i].NPRODUCTS; // 40+
                 }
                 else if (caddy2[i].AGE < 60) {
-                    B[3] -= caddy2[i].NPRODUCTS; // 50+
+                    B[3] += caddy2[i].NPRODUCTS; // 50+
                 }
                 else {
-                    B[4] -= caddy2[i].NPRODUCTS; // 60+
+                    B[4] += caddy2[i].NPRODUCTS; // 60+
                 }
             } else if (caddy2[i].NUTRISCORE[1].localeCompare("C") == 0) {
                 if (caddy2[i].AGE < 30) {
-                    C[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    C[0] += caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy2[i].AGE < 40) {
-                    C[1] -= caddy2[i].NPRODUCTS; //30+
+                    C[1] += caddy2[i].NPRODUCTS; //30+
                 }
                 else if (caddy2[i].AGE < 50) {
-                    C[2] -= caddy2[i].NPRODUCTS; // 40+
+                    C[2] += caddy2[i].NPRODUCTS; // 40+
                 }
                 else if (caddy2[i].AGE < 60) {
-                    C[3] -= caddy2[i].NPRODUCTS; // 50+
+                    C[3] += caddy2[i].NPRODUCTS; // 50+
                 }
                 else {
-                    C[4] -= caddy2[i].NPRODUCTS; // 60+
+                    C[4] += caddy2[i].NPRODUCTS; // 60+
                 }
             } else if (caddy2[i].NUTRISCORE[1].localeCompare("D") == 0) {
                 if (caddy2[i].AGE < 30) {
-                    D[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    D[0] += caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy2[i].AGE < 40) {
-                    D[1] -= caddy2[i].NPRODUCTS; //30+
+                    D[1] += caddy2[i].NPRODUCTS; //30+
                 }
                 else if (caddy2[i].AGE < 50) {
-                    D[2] -= caddy2[i].NPRODUCTS; // 40+
+                    D[2] += caddy2[i].NPRODUCTS; // 40+
                 }
                 else if (caddy2[i].AGE < 60) {
-                    D[3] -= caddy2[i].NPRODUCTS; // 50+
+                    D[3] += caddy2[i].NPRODUCTS; // 50+
                 }
                 else {
-                    D[4] -= caddy2[i].NPRODUCTS; // 60+
+                    D[4] += caddy2[i].NPRODUCTS; // 60+
                 }
             } else if (caddy2[i].NUTRISCORE[1].localeCompare("E") == 0) {
                 if (caddy2[i].AGE < 30) {
-                    E[0] -= caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
+                    E[0] += caddy2[i].NPRODUCTS; // 20+ perché abbiamo controllato che non esistono persone di meno di 20 anni
                 }
                 else if (caddy2[i].AGE < 40) {
-                    E[1] -= caddy2[i].NPRODUCTS; //30+
+                    E[1] += caddy2[i].NPRODUCTS; //30+
                 }
                 else if (caddy2[i].AGE < 50) {
-                    E[2] -= caddy2[i].NPRODUCTS; // 40+
+                    E[2] += caddy2[i].NPRODUCTS; // 40+
                 }
                 else if (caddy2[i].AGE < 60) {
-                    E[3] -= caddy2[i].NPRODUCTS; // 50+
+                    E[3] += caddy2[i].NPRODUCTS; // 50+
                 }
                 else {
-                    E[4] -= caddy2[i].NPRODUCTS; // 60+
+                    E[4] += caddy2[i].NPRODUCTS; // 60+
                 }
             }
         }
     }
+    console.log('Nutriscore 5C: A,B,C,D,E.');
     console.log(A);
     console.log(B);
     console.log(C);
