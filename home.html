@@ -68,7 +68,8 @@
                 <hr>
                 <div id="info">
                     <div>
-                        <div class="subtitleprod">Product name</div> <span id="name" class="prodname"></span> <!-- CAMBIARE FORMATTAZIONE PER IL NOME -->
+                        <div class="subtitleprod">Product name</div> <span id="name" class="prodname"></span>
+                        <!-- CAMBIARE FORMATTAZIONE PER IL NOME -->
                     </div>
                     <span class="w3-col l9">
                         <div class="subtitleprod">Score</div>
@@ -98,54 +99,99 @@
             </div>
         </div>
 
-        <i class="fas fa-user"></i> <!-- uses solid style -->
-        <i class="fab fa-github-square"></i> <!-- uses brand style -->
-        
+        <hr>
+
         <div class="w3-row-padding" style="padding: 0">
             <div class="w3-col l12" style="padding: 0">
-                test@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                <i class="fa fa-chart-bar"></i> Label Chart
+            </div>
+            <div class="w3-row-padding">
+                <div class="w3-col l2">
+                    Filter by:
+                    <select id="chooseAgeStipendio" onchange="chooseAsseX(this.options[this.selectedIndex].value)">
+                        <option selected value="anni">Age</option>
+                        <option value="stipendio">Salary</option>
+                        <!-- <option value="matches">Matches</option>
+                        <option value="goals">Goals</option> -->
+                    </select>
+                </div>
+                <div class="w3-col l4" style="text-align: end;">
+                    <select id="chooseLabel1" onchange="chooseLChart1(this.options[this.selectedIndex].value)">
+                        <option selected value="5C">Nutriscore 5C</option>
+                        <option value="TL">Traffic Lights</option>
+                        <option value="RIGDA">RI-GDA</option>
+                        <option value="neutre">Neutral</option>
+                    </select>
+                </div>
+                <div class="w3-col l6">
+                    <select id="chooseLabel2" onchange="chooseLChart2(this.options[this.selectedIndex].value)">
+                        <option value="5C">Nutriscore 5C</option>
+                        <option selected value="TL">Traffic Lights</option>
+                        <option value="RIGDA">RI-GDA</option>
+                        <option value="neutre">Neutral</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w3-row-padding">
+                <div class="w3-col l6">
+                    lchart1
+                    <div id="labelChart1"></div>
+                </div>
+                <div class="w3-col l6">
+                    lchart2
+                    <div id="labelChart2"></div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="w3-row-padding" style="padding: 0">
+            <div class="w3-col l6" style="padding: 0">
+                <div id="labelChart"></div>
+            </div>
+            <div class="w3-col l6" style="padding: 0">
+                <div id="labelChart2"></div>
             </div>
         </div>
 
-    </div>
 
-    <!-- ABOUT US -->
-    <h3 class="w3-center w3-teal" style="padding: 50px">ABOUT US</h3>
-    <div class="w3-container" style="padding: 20px 16px" id="about">
+        <!-- ABOUT US -->
+        <h3 class="w3-center w3-teal" style="padding: 50px">ABOUT US</h3>
+        <div class="w3-container" style="padding: 20px 16px" id="about">
 
-        <div class="w3-row-padding">
-            <div class="w3-col l3 m6"><br></div> <!-- empty column -->
-            <div class="w3-col l3 m6 w3-margin-bottom">
-                <div class="w3-card">
-                    <img src="/img/gab.jpg" alt="Gabriele" style="width:100%">
-                    <div class="w3-container">
-                        <h3>Gabriele Guo</h3>
-                        <p class="w3-opacity">Ingegneria Informatica<br>Università degli Studi di Genova</p>
-                        <hr>
-                        <p><i class="fa fa-id-card-alt w3-padding"></i>3982992</p>
-                        <p><i class="fa fa-envelope w3-padding"></i>gabriele.guo@gmail.com</p>
-                        <p><i class=" fab fa-linkedin w3-padding"></i><a href="https://www.linkedin.com/in/gabrieleguo/"
-                                target="_blank">Gabriele Guo</a></p>
+            <div class="w3-row-padding">
+                <div class="w3-col l3 m6"><br></div> <!-- empty column -->
+                <div class="w3-col l3 m6 w3-margin-bottom">
+                    <div class="w3-card">
+                        <img src="/img/gab.jpg" alt="Gabriele" style="width:100%">
+                        <div class="w3-container">
+                            <h3>Gabriele Guo</h3>
+                            <p class="w3-opacity">Ingegneria Informatica<br>Università degli Studi di Genova</p>
+                            <hr>
+                            <p><i class="fa fa-id-card-alt w3-padding"></i>3982992</p>
+                            <p><i class="fa fa-envelope w3-padding"></i>gabriele.guo@gmail.com</p>
+                            <p><i class=" fab fa-linkedin w3-padding"></i><a
+                                    href="https://www.linkedin.com/in/gabrieleguo/" target="_blank">Gabriele Guo</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="w3-col l3 m6 w3-margin-bottom">
-                <div class="w3-card">
-                    <img src="/img/temp.jpg" alt="Luca" style="width:100%">
-                    <div class="w3-container">
-                        <h3>Luca Rabagliati</h3>
-                        <p class="w3-opacity">Ingegneria Informatica<br>Università degli Studi di Genova</p>
-                        <hr>
-                        <p><i class="fa fa-id-card-alt w3-padding"></i>3971299</p>
-                        <p><i class="fa fa-envelope w3-padding"></i>luca.rabagliati.majo@gmail.com </p>
+                <div class="w3-col l3 m6 w3-margin-bottom">
+                    <div class="w3-card">
+                        <img src="/img/temp.jpg" alt="Luca" style="width:100%">
+                        <div class="w3-container">
+                            <h3>Luca Rabagliati</h3>
+                            <p class="w3-opacity">Ingegneria Informatica<br>Università degli Studi di Genova</p>
+                            <hr>
+                            <p><i class="fa fa-id-card-alt w3-padding"></i>3971299</p>
+                            <p><i class="fa fa-envelope w3-padding"></i>luca.rabagliati.majo@gmail.com </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script type="text/javascript" src="scripts/main.js"></script>
-    <script type="text/javascript" src="scripts/secondary.js"></script>
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/secondary.js"></script>
 </body>
 
 </html>
