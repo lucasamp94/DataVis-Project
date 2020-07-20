@@ -1075,7 +1075,7 @@ function createLabelChart1(asseX, label) {
     var x0 = d3.scaleBand()
         .domain(d3.range(n))
         .range([0, width], .2);
-    //m gruppi   
+    //m gruppi        
     var x1 = d3.scaleBand()
         .domain(d3.range(m))
         .range([0, x0.bandwidth() - 10]);
